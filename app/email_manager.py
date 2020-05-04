@@ -4,7 +4,8 @@ from email.mime.text import MIMEText
 
 
 class EmailManager:
-    def __init__(self, login=None, password=None, recipient=None, subject=None, message=None, host="smtp.gmail.com", port=587):
+    def __init__(self, login=None, password=None, recipient=None, subject=None,
+                 message=None, host="smtp.gmail.com", port=587):
         self.login = login
         self.password = password
         self.recipient = recipient
@@ -17,6 +18,7 @@ class EmailManager:
         message = 'New note:\n'
         for news in unseen_news:
             message += news + '\n'
+        message += '\n https://www.mdm.pl/ui-pub/site/analizy_i_rynek/analizy_i_rekomendacje'
         return message
 
     def send(self, login, password, recipient, subject, message):
