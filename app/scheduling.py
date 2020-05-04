@@ -2,7 +2,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
 from app.reco_fetcher import RecoFetcher
 from app.history_manager import HistoryManager
-from pprint import pprint
 
 
 class Scheduling:
