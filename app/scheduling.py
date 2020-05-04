@@ -12,7 +12,7 @@ class Scheduling:
 
     def run(self):
         self.scheduler.add_job(func=self.check_recommendations, trigger="interval",
-                               seconds=15)
+                               seconds=30)
         self.scheduler.start()
         atexit.register(lambda: self.scheduler.shutdown())
 

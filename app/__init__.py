@@ -1,7 +1,10 @@
 from flask import Flask
 from app.scheduling import Scheduling
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-scheduling = Scheduling()
-scheduling.run()
+    with app.app_context():
+        scheduling = Scheduling()
+        scheduling.run()
+        return app
