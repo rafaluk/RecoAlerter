@@ -14,13 +14,12 @@ class HistoryManager:
             content = file.readlines()
         return [x.strip() for x in content]
 
-    # move to utils
+    # todo: move to utils
     def compare_lists_and_choose_unseen(self, previous_history: list, new_history: list) -> list:
         return [element for element in new_history if element not in previous_history]
 
     def save_new_reco_to_file(self, new_history: list):
-        with open(self._filename, 'r+', encoding=self._encoding) as file:
-            content = file.read()
-            file.seek(0, 0)
+        # save at the end of the file - the order is not significant
+        with open(self._filename, 'a', encoding=self._encoding) as file:
             for line in new_history:
-                file.write(line.rstrip('\r\n') + '\n' + content)
+                file.write(line.rstrip('\r\n') + '\n')
