@@ -14,9 +14,10 @@ class EmailManager:
         self.port = port
 
     def prepare(self, unseen_news: list):
-        message = ''
+        message = 'New note:\n'
         for news in unseen_news:
             message += news + '\n'
+        return message
 
     def send(self, login, password, recipient, subject, message):
         server = smtplib.SMTP(host=self.host, port=587)

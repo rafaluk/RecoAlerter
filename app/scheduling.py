@@ -2,6 +2,8 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
 from app.reco_fetcher import RecoFetcher
 from app.history_manager import HistoryManager
+from app.email_manager import EmailManager
+from app.utils import Constants
 
 
 class Scheduling:
@@ -22,21 +24,17 @@ class Scheduling:
 
         # history
         hm = HistoryManager()
-        # get from file
         history = hm.get_from_file()
-        print('history:')
-        print(history)
         new_only = hm.compare_lists_and_choose_unseen(history, reco_list_new)
-        print('new_only:')
-        print(new_only)
         hm.save_new_reco_to_file(new_only)
 
         # send email
         if len(new_only) > 0:
-            pass
-
-        # update history
-        # check if new -> send email
+            em = EmailManager()
+            message = em.prepare(new_only)
+            subject = '[MDM] New note!'
+            em.send(login=Constants.LOGIN, password=Constants.PASSWORD,
+                    recipient=Constants.MY_EMAIL, subject=subject, message=message)
 
 
 
