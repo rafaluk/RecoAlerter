@@ -2,3 +2,4 @@
 app/__pycache__/
 biba.txt
 config.json
+__pycache__/
